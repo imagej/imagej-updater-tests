@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  imagej:
+    image: nginx
+    volumes:
+     - ../update.imagej.net:/usr/share/nginx/html
+  fiji:
+    image: nginx
+    volumes:
+     - ../update.fiji.sc:/usr/share/nginx/html
+  redirect:
+    image: nginx
+    volumes:
+     - ./nginx.conf:/etc/nginx/conf.d/default.conf
+  client:
+    image: fiji/fiji
+    # These three settings can be used 
+    # rather than command: ./ImageJ-...
+    # in order to access the cli.
+    # --------------------------------
+    # stdin_open: true
+    # tty: true
+    # command: bash
+    command: ./ImageJ-linux64 --update list-update-sites
+    links:
+      - imagej:update.imagej.net
+      - fiji:update.fiji.sc
+      - redirect:fiji.sc
+
+networks:
+  default:
+    internal: true
