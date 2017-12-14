@@ -11,6 +11,9 @@ linked into the Docker containers with the expected alias. If
 `./ImageJ-linux64 --update ...` tries to access any other URL,
 there will be a short hang before a stacktrace is printed.
 
+An ownCloud WebDav server is also started in case the client
+would like to push to a clean update site.
+
 Setup
 -----
 
