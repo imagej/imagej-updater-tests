@@ -14,7 +14,17 @@ services:
     stdin_open: true
     tty: true
     command: bash
-    #command: ./ImageJ-linux64 --update list-update-sites
+    links:
+      - imagej:update.imagej.net
+      - fiji:update.fiji.sc
+      - redirect:fiji.sc
+      - sites:sites.imagej.net
+
+  # Simple test that can be run separately.
+  ##############################################
+  test:
+    image: fiji/fiji
+    command: ./ImageJ-linux64 --update list-update-sites
     links:
       - imagej:update.imagej.net
       - fiji:update.fiji.sc
@@ -41,7 +51,12 @@ services:
     volumes:
      - ./nginx.conf:/etc/nginx/conf.d/default.conf
 
-
+  # Partial mirror of sites.imagej.net
+  ####################################
+  sites:
+    image: nginx
+    volumes:
+     - ../sites.imagej.net:/usr/share/nginx/html
 
   # WebDav server
   ###############

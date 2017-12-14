@@ -18,8 +18,10 @@ Setup
 -----
 
 * install docker, docker-compose, etc.
-* `wget --mirror update.imagej.net # 1GB`
-* `wget --mirror update.fiji.sc # 2.4GB`
+* `wget --mirror update.imagej.net # 1 GB`
+* `wget --mirror update.fiji.sc # 2.4 GB`
+* `wget -r -np http://sites.imagej.net/Fiji-Legacy/`
+* `wget --mirror sites.imagej.net/Fiji-Legacy  # 17 MB`
 * Make any necessary changes to the mirrored directories.
   This does not *yet* support using the provided NGINX
   instances for uploading, though that is likely doable
